@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Viver de IA — Design System
+ *  Light (default): off-white morno #F9F9F9 + tinta navy #02162A + accent azul #0A4F95
+ *  Dark: navy invertido — navy é fundo, branco é tinta, azul permanece accent
+ *
+ *  Fontes: Avenir LT Std (Light 300 / Roman 400 / Heavy 700-900)
+ *  Tokens canônicos em src/design-system/viverdeia/colors_and_type.css
+ */
+
+@font-face {
+  font-family: 'Avenir LT Std';
+  src: url('/fonts/AvenirLTStd-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Avenir LT Std';
+  src: url('/fonts/AvenirLTStd-LightOblique.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Avenir LT Std';
+  src: url('/fonts/AvenirLTStd-Roman.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Avenir LT Std';
+  src: url('/fonts/AvenirLTStd-Oblique.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Avenir LT Std';
+  src: url('/fonts/AvenirLTStd-Heavy.otf') format('opentype');
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  /* Default = light (VIA é light-first) */
+  :root, .light {
+    /* navy #02162A = 211 91% 9% · blue #0A4F95 = 210 87% 31% */
+    --background: 0 0% 98%;              /* #F9F9F9 off-white morno */
+    --foreground: 211 91% 9%;            /* navy — tinta */
+    --card: 0 0% 100%;                   /* superfícies elevadas */
+    --card-foreground: 211 91% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 211 91% 9%;
+    --primary: 211 91% 9%;               /* navy sólido */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 12% 95%;            /* #F0F2F5 */
+    --secondary-foreground: 211 91% 9%;
+    --muted: 220 12% 95%;
+    --muted-foreground: 213 13% 49%;     /* #6B7A8D */
+    --accent: 210 87% 31%;               /* azul VIA — único accent */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 5 59% 45%;            /* #B63A2F */
+    --destructive-foreground: 0 0% 100%;
+    --border: 213 20% 88%;               /* navy/15 aproximado em opaco */
+    --input: 213 20% 88%;
+    --ring: 210 87% 31%;                 /* foco azul */
+    --radius: 0.75rem;
+
+    /* Sidebar — sempre navy escura (padrão VIA) */
+    --sidebar-background: 211 91% 9%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 210 87% 31%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 211 60% 14%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 211 50% 18%;
+    --sidebar-ring: 210 87% 31%;
+  }
+
+  .dark {
+    --background: 211 91% 9%;            /* navy */
+    --foreground: 0 0% 98%;
+    --card: 211 70% 12%;
+    --card-foreground: 0 0% 98%;
+    --popover: 211 70% 12%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 100%;                /* em dark, primário = branco */
+    --primary-foreground: 211 91% 9%;
+    --secondary: 211 50% 16%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 211 50% 16%;
+    --muted-foreground: 213 15% 70%;
+    --accent: 210 87% 45%;               /* azul levemente mais claro pra contraste */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 5 65% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 211 40% 20%;
+    --input: 211 40% 22%;
+    --ring: 210 87% 45%;
+
+    --sidebar-background: 211 91% 7%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 210 87% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 211 60% 12%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 211 50% 16%;
+    --sidebar-ring: 210 87% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Avenir LT Std', 'Avenir Next', Avenir, 'Helvetica Neue', sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 900;
+    letter-spacing: -0.01em;
+  }
+
+  button, a, input, textarea, select {
+    @apply transition-colors duration-200;
+  }
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--accent) / 0.6); }
+
+*:focus-visible {
+  @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+}
